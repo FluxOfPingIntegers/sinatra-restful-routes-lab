@@ -15,14 +15,10 @@ class ApplicationController < Sinatra::Base
     erb :new
   end
 
-  post '/recipes/new' do # 3. 'this controller action will create and save a new recipe to the database'
-    if Recipe.create(params).save
-      recipe = Recipe.create(params)
-      recipe.save
+  post '/recipes' do # 3. 'this controller action will create and save a new recipe to the database'
+    if recipe = Recipe.create(params)
       session[:id] = recipe[:id]
-      redirect "/recipes/#{recipe[:id]}"
-    else
-      redirect '/recipes/new'
+      redirect to "/recipes/#{recipe[:id]}"
     end
   end
 
@@ -43,9 +39,15 @@ class ApplicationController < Sinatra::Base
 
   patch '/recipes/:id/edit' do
     recipe = Recipe.all.find(params[:id])
-    recipe.update(params)
+    recipe.update(name: params[:name], ingredients: params[:ingredients], cook_time: params[:cook_time])
     recipe.save
-    redirect "/recipes/#{recipe[:id]}"
+    redirect to "/recipes/#{recipe[:id]}"
   end
+
+  delete '/recipes/:id' do
+    recipe = Recipe.all.find(params[:id])
+    recipe.destroy
+  end
+
 
 end

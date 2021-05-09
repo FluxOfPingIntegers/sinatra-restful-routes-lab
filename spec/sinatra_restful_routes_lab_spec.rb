@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe "Recipe App" do
   let(:recipe_name) { "Bomb.com Mac and Cheese" }

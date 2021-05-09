@@ -2,7 +2,7 @@
 
   <h1> <%= @recipe.name %> </h1>
 
-  <form method="post" action="recipes/<%= @recipe.id %>/edit">
+  <form method="post" action="/recipes/<%= @recipe.id %>/edit">
     <label for="name"><%= @recipe.name %></label>
     <input type="text" id="name" name="name">
 
